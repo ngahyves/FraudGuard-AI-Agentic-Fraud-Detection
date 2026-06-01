@@ -46,8 +46,7 @@ PR-AUC	0.95	High discriminative power on imbalanced AML data.
 F2-Score	91.8%	Prioritizes fraud capture over false positives.
 p99 Latency	299ms	Real-time response for high-frequency banking.
 ## 🏗️ System Workflow
-code
-Mermaid
+```mermaid
 graph LR
     A[AMLnet Data] --> B[Pandera Validation]
     B --> C[XGBoost Optimization]
@@ -55,6 +54,7 @@ graph LR
     D --> E[Streamlit UI]
     E --> F[Audit Log SQL]
     F --> G[Grafana Monitoring]
+```
 ## 📸 Proof of Work 
 
 * 🔬 Agent Reasoning (Streamlit)
