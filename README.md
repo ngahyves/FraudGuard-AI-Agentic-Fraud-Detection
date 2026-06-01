@@ -6,6 +6,7 @@ While traditional ML models act as "black boxes," FraudGuard AI integrates a Lan
 ***🧠 Intelligence & Machine Learning***
 
 * Component	Technology
+
 Model-->	XGBoost (Optimized champion), Scikit-learn (Pipelines)
 
 Generative AI-->	LangGraph (Agentic orchestration), Llama 3.1 via Groq
