@@ -46,7 +46,6 @@ prefect.db
 
 # Evidently reports
 reports/*.json
-reports/*.html
 
 # Prometheus & Grafana
 prometheus_data/

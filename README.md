@@ -68,7 +68,11 @@ Tracking of 30+ Optuna trials to reach the 95% PR-AUC champion model.
 * Langsmith monitoring
 ![alt text](reports/snap_shots_langsmith/agent_decision.png)
 * 📊 Monitoring as Code (Grafana)
-The monitoring dashboard is fully reproducible. The configuration is stored as Infrastructure as Code in grafana_dashboard.json.
+The monitoring dashboard is fully reproducible. The configuration is stored as Infrastructure as Code in **grafana_dashboard.json.** 
+* Drift test
+The drift monitoring test is available on the link below:
+
+https://www.google.com/url?sa=E&q=https%3A%2F%2Fhtmlpreview.github.io%2F%3Fhttps%3A%2F%2Fgithub.com%2Fngahyves%2FFraudGuard-AI-Agentic-Fraud-Detection%2Fblob%2Fmain%2Freports%2Fdrift_report%2Fdrift_report.html
 Metrics Tracked: CPU/RAM usage, API Throughput, Error rates, and Inference Latency (p50, p95, p99).
 * 🚦 Getting Started
 1. Launch with Docker
@@ -97,6 +101,7 @@ Bash
 docker compose exec api python -m pytest tests/ -v
 
 
-👨‍💻 Author
-Yves-Ricky – Machine Learning Software Engineer
-M.Sc. in Biostatistics | Specializing in Production-Grade ML & Agentic AI.
+# 👨‍💻 Author
+
+**Yves-Ricky – Machine Learning Software Engineer**
+**M.Sc. in Biostatistics | Specializing in Production-Grade ML & Agentic AI.**
