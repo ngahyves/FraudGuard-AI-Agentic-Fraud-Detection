@@ -1,0 +1,16 @@
+
+data/
+mlruns/
+pgdata/
+fraud_env/
+.venv/
+venv/
+__pycache__/
+*.csv
+*.parquet
+*.joblib
+!models/best_xgboost_tuned.joblib 
+
+.git
+.gitignore
+*.log

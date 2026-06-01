@@ -1,0 +1,37 @@
+name: FraudGuard CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: uses/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Correction Numpy 2.0 pour la CI
+          pip install "numpy<2.0.0" pandera pytest pytest-asyncio
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Pytest
+        env:
+          PYTHONPATH: .
+          # We mock API keys so that tests don't crash in CI
+          GROQ_API_KEY: "mock_key"
+          LANGSMITH_API_KEY: "mock_key"
+          DATABASE_URL: "postgresql://user:pass@localhost:5432/db" 
+        run: |
+          # Run the tests (skip API tests that require a real database if necessary)
+          python3 -m pytest tests/ -v

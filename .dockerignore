@@ -1,0 +1,60 @@
+# Environment 
+fraud_env/
+env/
+.venv/
+venv/
+ENV/
+
+# Data - Exclude raw data but keep processed samples
+data/raw/
+data/raw/*
+data/raw/*.csv   
+data/processed/*.parquet
+!data/processed/sample.parquet
+!data/processed/raw_data.parquet
+data/reference/
+!data/reference/*.parquet
+data/current/
+!data/current/*.parquet
+
+# MLflow
+mlartifacts/
+mlruns/
+mlflow.db
+
+# Models - exclude large files but keep structure
+models/*
+!models/best_xgboost_tuned.joblib
+# Notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Archives
+*.zip
+*.tar
+*.gz
+*.bz2
+

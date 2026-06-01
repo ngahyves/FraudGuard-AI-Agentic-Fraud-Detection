@@ -1,0 +1,104 @@
+# config.yaml
+
+project:
+  name: "Fraud AI Agent"
+  version: "1.0.0"
+
+data:
+  raw_path: "data/raw/amlnet.csv"
+  processed_path: "data/processed/"
+  processed_file: "data_processed.joblib"
+  target_column: "isFraud"
+  sample_rows: 300000
+  sample: "data/processed/sample/parquet"
+  first_split_test_size: 0.3    # 30% for X_temp
+  second_split_test_size: 0.5   # 50% of X_temp for test
+  random_state: 42
+  imbalance_ratio: 0.0016 # 0.16%
+
+features:
+  numerical:
+    - step
+    - amount
+    - hour
+    - day_of_week
+    - day_of_month
+    - month
+
+  categorical:
+    - type
+    - category
+
+  exclude:
+    - nameOrig
+    - nameDest
+    - isFraud
+    - isMoneyLaundering
+    - metadata
+    - fraud_probability
+    - laundering_typology
+expected_hash: "26a0a19869c3d8e3fd123ba917e3697ad563d4525c957faa9d740c0c6724b927"
+
+#Evidently report
+paths:
+  reference_data: "data/reference.parquet"
+  current_data: "data/current.parquet"
+  drift_report: "reports/drift_report.html"
+
+paths:
+  reference_data: "data/reference/reference_data.parquet"
+  current_data: "data/current/current_data.parquet"
+  drift_report: "reports/drift_report.html"
+
+
+# Phase 1: models comparison
+experimentation:
+  tracking_uri: "http://localhost:5000"
+  experiment_name: "fraud_model_comparison"
+  candidate_models:
+    - "logistic_regression"
+    - "random_forest"
+    - "xgboost"
+    - "lightgbm"
+  metric_to_optimize: "pr_auc" # Crucial for imbalanced dataset
+
+# Phase 2: Hyperparameter Tuning with Optuna
+tuning:
+  n_trials: 30
+  timeout: 3600 # 1 hr max
+  study_name: "xgboost_optimization"
+
+# Decision threshold for LangGraph agent
+agent:
+  model_name: "llama-3-70b-versatile"
+  temperature: 0
+  thresholds:
+    secure: 0.3    # Score < 0.3 => Approve
+    risky: 0.7     # Score > 0.7 => Reject
+                   # between => Agent Decision (Escalate)
+
+# Baseline parameters
+model_params:
+  logistic_regression:
+    max_iter: 1000
+    solver: "lbfgs"
+    class_weight: "balanced"
+  
+  random_forest:
+    n_estimators: 100
+    max_depth: 10
+    class_weight: "balanced"
+
+  xgboost:
+    n_estimators: 200
+    max_depth: 6
+    learning_rate: 0.05
+    scale_pos_weight: 625 # 1 / 0.0016 for the imbalance
+
+  lightgbm:
+    n_estimators: 200
+    num_leaves: 31
+    learning_rate: 0.05
+    is_unbalance: true
+    sub_sample: 0.8
+    colsample_bytree: 0.8

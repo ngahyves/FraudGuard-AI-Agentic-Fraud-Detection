@@ -1,0 +1,28 @@
+# API
+fastapi
+uvicorn[standard]
+pydantic
+
+# Core ML
+numpy<=2.0.0
+pandas
+scikit-learn==1.5.2
+xgboost==3.2.0
+joblib
+xgboost
+shap
+matplotlib
+
+# Database & Environment
+psycopg2-binary
+python-dotenv
+
+# Observability
+prometheus-fastapi-instrumentator
+
+# LLM (fraud agent)
+groq
+langchain
+langchain-community
+langsmith
+langchain-groq

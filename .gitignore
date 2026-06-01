@@ -1,0 +1,67 @@
+# === Python & Environments ===
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+venv_linux/
+fraud_env/
+fraud_venv/
+env/
+build/
+dist/
+*.egg-info/
+
+# === Secrets & Config ===
+.env
+.python-version
+.ipynb_checkpoints/
+
+# === Data (TRÈS IMPORTANT) ===
+data/raw/*
+data/processed/*
+data/current/*
+data/reference/*
+
+#send .gitkeep files to save the project struture
+!data/**/.gitkeep
+*.csv
+*.parquet
+*.jsonl
+
+# === Models ML ===
+models/*.joblib
+models/*.pkl
+models/*.onnx
+
+# === MLOps & Monitoring ===
+# MLflow
+mlruns/
+mlartifacts/
+mlflow.db
+
+# Prefect
+.prefect/
+prefect.db
+
+# Evidently reports
+reports/*.json
+reports/*.html
+
+# Prometheus & Grafana
+prometheus_data/
+grafana_data/
+pgdata/
+
+# === Docker ===
+.docker/
+
+# === Logs ===
+*.log
+logs/
+
+# === OS & IDE ===
+.DS_Store
+.vscode/
+.idea/
+*.swp

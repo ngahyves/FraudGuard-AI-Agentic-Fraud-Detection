@@ -1,0 +1,120 @@
+services:
+  # ============================================================
+  # DATABASE
+  # ============================================================
+  postgres:
+    image: postgres:15
+    container_name: fraudguard-postgres
+    environment:
+      POSTGRES_USER: fraudguard
+      POSTGRES_PASSWORD: fraudguard
+      POSTGRES_DB: fraudguard_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - fraud-network
+
+  # ============================================================
+  # API FASTAPI
+  # ============================================================
+  api:
+    image: fraudguard-api
+    container_name: fraudguard-api
+    environment:
+      - DATABASE_URL=postgresql://fraudguard:fraudguard@postgres:5432/fraudguard_db
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - LANGSMITH_API_KEY=${LANGSMITH_API_KEY}
+      - LANGSMITH_PROJECT=fraudguardAI
+      - PORT=8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000
+    networks:
+        - fraud-network
+
+  # ============================================================
+  # MLFLOW (EXPERIMENT TRACKING)
+  # ============================================================
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.19.0
+    container_name: fraudguard-mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlruns:/mlruns
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri /mlruns --artifacts-destination /mlruns
+    networks:
+      - fraud-network
+
+  # ============================================================
+  # PROMETHEUS (METRICS)
+  # ============================================================
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: fraudguard-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - fraud-network
+
+  # ============================================================
+  # GRAFANA (DASHBOARD)
+  # ============================================================
+  grafana:
+    image: grafana/grafana:latest
+    container_name: fraudguard-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_USER=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+    depends_on:
+      - prometheus
+    networks:
+      - fraud-network
+
+  # ============================================================
+  # STREAMLIT (FRONT-END)
+  # ============================================================
+  streamlit:
+    image: python:3.11-slim
+    container_name: fraudguard-streamlit
+    volumes:
+      - .:/app
+    working_dir: /app
+    environment:
+      - API_URL=http://api:8000
+    command: sh -c "pip install streamlit requests && streamlit run streamlit_app.py --server.port 8501 --server.address 0.0.0.0"
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
+    networks:
+      - fraud-network
+
+# ============================================================
+# NETWORKS & VOLUMES
+# ============================================================
+networks:
+  fraud-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+  prometheus_data:
+  grafana_data:

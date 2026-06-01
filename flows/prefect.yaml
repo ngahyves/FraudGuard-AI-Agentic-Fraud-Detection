@@ -1,0 +1,19 @@
+# prefect.yaml
+name: fraudguard-pipeline
+prefect-version: 2.x
+
+build:
+  - python: ./flows/fraud_flows.py
+
+deployments:
+  - name: daily-pipeline
+    entrypoint: flows/fraud_flows.py:full_pipeline
+    schedule:
+      interval: 86400  # 1 jour
+    parameters: {}
+
+  - name: weekly-retrain
+    entrypoint: flows/fraud_flows.py:auto_retrain_flow
+    schedule:
+      cron: "0 2 * * 1"  # monday 2h
+    parameters: {}
