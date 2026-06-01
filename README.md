@@ -16,20 +16,20 @@ Service	URL	Role
 ## 🎯 Core Achievements & Architecture
 ### 🔬 1. Software Architecture & Model Engineering
 Designed and owned the end-to-end software architecture from prototyping to production:
-Benchmarking: Evaluated 4 model architectures on a highly imbalanced dataset (0.17% fraud rate).
-Optimization: Tuned a champion XGBoost via Optuna (30 trials).
-Performance: Achieved 94% Recall, 92% F2-score, and 95% PR-AUC.
-Reproducibility: All trials tracked across 35+ MLflow experiments.
+Benchmarking: Evaluated **4 model architectures** on a highly **imbalanced dataset (0.17% fraud rate).**
+Optimization: Tuned a champion XGBoost via **Optuna (30 trials)**.
+Performance: Achieved **94% Recall, 92% F2-score, and 95% PR-AUC**.
+Reproducibility: All trials tracked across **35+ MLflow experiments**.
 ### 🤖 2. Agentic AI & Regulatory Traceability
 Built a production-grade Agentic AI system using LangGraph to solve the "black box" problem:
 Modular API: Exposed via 5 FastAPI/Pydantic endpoints (Predict, Explain, QA, Audit).
 Persistence: Every inference (scores, SHAP values, LLM explanations, latency) is persisted to a PostgreSQL audit table.
 Compliance: Enabled full regulatory traceability by linking math (SHAP) with reasoning (Llama 3.1).
 ### 🏗️ 3. Large-Scale Data Pipeline
-Engineered a robust pipeline handling 1M+ rows with a focus on efficiency:
-Integrity: Batch ingestion with Pandera schema validation.
-Optimization: Memory footprint reduced via feature downcasting and Parquet storage.
-Rigor: Stratified 3-way train/val/test split to handle extreme class imbalance.
+Engineered a robust pipeline handling **1M+ rows** with a focus on efficiency and errors handling:
+**Integrity**: Batch ingestion with **Pandera schema** validation.
+**Optimization**: Memory footprint reduced via feature downcasting and Parquet storage.
+Rigor: **Stratified 3-way train/val/test** split to handle extreme class imbalance.
 ### 🖥️ 4. Interactive Analyst Interface (Streamlit)
 Developed a functional user-facing product to bridge the gap between backend and business:
 Investigation: Interface for analysts to submit credit applications and visualize fraud risk.
@@ -103,5 +103,5 @@ docker compose exec api python -m pytest tests/ -v
 
 # 👨‍💻 Author
 
-**Yves-Ricky – Machine Learning Software Engineer**
+**Yves-Bernard-Simplice NGAH – Machine Learning Software Engineer**
 **M.Sc. in Biostatistics | Specializing in Production-Grade ML & Agentic AI.**
