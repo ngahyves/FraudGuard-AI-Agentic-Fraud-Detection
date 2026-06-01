@@ -2,6 +2,43 @@
 FraudGuard AI is an industrial-grade, end-to-end ecosystem designed to detect money laundering and financial fraud within the AMLnet dataset.
 
 While traditional ML models act as "black boxes," FraudGuard AI integrates a LangGraph-powered Agent that reasons over SHAP explainability factors. It provides human-readable justifications for every decision, ensuring full regulatory compliance and auditability for banking institutions.
+## 🛠️ The Tech Stack
+*** 🧠 Intelligence & Machine Learning ***
+
+* Component	Technology
+Model-->	XGBoost (Optimized champion), Scikit-learn (Pipelines)
+
+Generative AI-->	LangGraph (Agentic orchestration), Llama 3.1 via Groq
+
+Optimization-->	Optuna (Hyperparameter Tuning - 30 Trials)
+
+Explainability-->	SHAP (Local & Global feature impact)
+*** 🏗️ Software Engineering & Data ***
+Component-->	Technology
+
+API-->	FastAPI (5 production endpoints), Uvicorn
+
+Frontend-->	Streamlit (Analyst Investigation Dashboard)
+
+Data Validation-->	Pandera (Strict schema enforcement), Pydantic V2
+
+Database-->	PostgreSQL (Hosted on Neon.tech), SQLAlchemy
+
+*** 🚀 MLOps & Infrastructure ***
+* Component-->	Technology
+Orchestration-->	Prefect (Workflow automation)
+
+Containerization-->	Docker, Docker Compose
+
+Cloud	GCP Cloud Run--> (Serverless deployment)
+
+Tracking	MLflow--> (35+ experiments), LangSmith (LLM tracing)
+
+Observability-->	Prometheus, Grafana, Evidently AI (Drift detection)
+
+Quality/CI-CD-->	GitHub Actions, Pytest (8-category suite), Flake8
+
+
 ## ⚡ Quick Access (Local Services)
 If the system is running via Docker, you can access the full stack here:
 Service	URL	Role
@@ -57,20 +94,20 @@ graph LR
 ```
 ## 📸 Proof of Work 
 
-* 🔬 Agent Reasoning (Streamlit)
+*** 🔬 Agent Reasoning (Streamlit) ***
 ![alt text](reports/streamlit_dash_1.png)
 ![alt text](reports/streamlit_dash_2.png)
 The frontend enables real-time interaction with the AI Agent and SHAP explanations.
-* 📈 Experiment Tracking (MLflow)
+*** 📈 Experiment Tracking (MLflow) ***
 ![alt text](reports/baseline_comparison.png)
 Tracking of 30+ Optuna trials to reach the 95% PR-AUC champion model.
 ![alt text](reports/best_model_metrics.png)
-* Langsmith monitoring
+*** Langsmith monitoring***
 ![alt text](reports/snap_shots_langsmith/agent_decision.png)
-* 📊 Monitoring as Code (Grafana)
+*** 📊 Monitoring as Code (Grafana)***
 The monitoring dashboard is fully reproducible. The configuration is stored as Infrastructure as Code in **grafana_dashboard.json.** 
-* Drift test
-The drift monitoring test is available on the link below:
+*** Drift test ***
+Statistical monitoring of feature distributions to detect model decay. This report compares the training reference data against production transaction streams.
 
 https://www.google.com/url?sa=E&q=https%3A%2F%2Fhtmlpreview.github.io%2F%3Fhttps%3A%2F%2Fgithub.com%2Fngahyves%2FFraudGuard-AI-Agentic-Fraud-Detection%2Fblob%2Fmain%2Freports%2Fdrift_report%2Fdrift_report.html
 Metrics Tracked: CPU/RAM usage, API Throughput, Error rates, and Inference Latency (p50, p95, p99).

@@ -9,7 +9,6 @@ from datetime import datetime
 # Otherwise, fallback to DATABASE_URL (Docker Compose or local).
 DB_URL = os.getenv("DATABASE_URL") or os.getenv("DATABASE_URL_PROD")
 
-
 def get_conn():
     return psycopg2.connect(DB_URL, cursor_factory=psycopg2.extras.RealDictCursor)
 
