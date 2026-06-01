@@ -3,7 +3,7 @@ FraudGuard AI is an industrial-grade, end-to-end ecosystem designed to detect mo
 
 While traditional ML models act as "black boxes," FraudGuard AI integrates a LangGraph-powered Agent that reasons over SHAP explainability factors. It provides human-readable justifications for every decision, ensuring full regulatory compliance and auditability for banking institutions.
 ## 🛠️ The Tech Stack
-*** 🧠 Intelligence & Machine Learning ***
+***🧠 Intelligence & Machine Learning***
 
 * Component	Technology
 Model-->	XGBoost (Optimized champion), Scikit-learn (Pipelines)
@@ -13,7 +13,7 @@ Generative AI-->	LangGraph (Agentic orchestration), Llama 3.1 via Groq
 Optimization-->	Optuna (Hyperparameter Tuning - 30 Trials)
 
 Explainability-->	SHAP (Local & Global feature impact)
-*** 🏗️ Software Engineering & Data ***
+***🏗️ Software Engineering & Data***
 Component-->	Technology
 
 API-->	FastAPI (5 production endpoints), Uvicorn
@@ -24,8 +24,9 @@ Data Validation-->	Pandera (Strict schema enforcement), Pydantic V2
 
 Database-->	PostgreSQL (Hosted on Neon.tech), SQLAlchemy
 
-*** 🚀 MLOps & Infrastructure ***
+***🚀 MLOps & Infrastructure***
 * Component-->	Technology
+
 Orchestration-->	Prefect (Workflow automation)
 
 Containerization-->	Docker, Docker Compose
